@@ -37,23 +37,22 @@ public class MyServlet extends HttpServlet {
 	 */
 	protected void service(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
+
 		String prodName = request.getParameter("name");
 		Double prodCost = Double.parseDouble(request.getParameter("cost"));
-		
+
 		Product product = new Product();
 		product.setName(prodName);
 		product.setUnitCost(prodCost);
-		
+
 		catalogServiceLocal.createProduct(product);
-		
+
 		List<Product> prods = catalogServiceLocal.findAllProducts();
-		System.out.println("///: " + prods.size());
 		request.setAttribute("prods", prods);
-		
+
 		RequestDispatcher rd = request.getRequestDispatcher("product-list.jsp");
 		rd.forward(request, response);
-		
+
 	}
 
 }
