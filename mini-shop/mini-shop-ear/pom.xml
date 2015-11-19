@@ -44,9 +44,17 @@
 				</configuration>
 				<executions>
 					<execution>
+						<id>deploy</id>
 						<phase>install</phase>
 						<goals>
 							<goal>deploy</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>undeploy</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>undeploy</goal>
 						</goals>
 					</execution>
 				</executions>
