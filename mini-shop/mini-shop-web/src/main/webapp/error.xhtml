@@ -7,16 +7,7 @@
 	<ui:define name="pageTitle">onePage</ui:define>
 	<ui:define name="pageTop">this is the page Top</ui:define>
 	<ui:define name="pageContent">
-		<h1>Login Page</h1>
-		<h:form>
-			<h:panelGrid columns="2">
-				<h:outputText value="login" />
-				<h:inputText value="#{loginBean.user.login}" />
-				<h:outputText value="password" />
-				<h:inputSecret value="#{loginBean.user.password}" />
-				<h:commandButton action="#{loginBean.doLogin()}" value="login" />
-			</h:panelGrid>
-		</h:form>
+		<h1 style="color: red">login failed</h1>
 	</ui:define>
 	<ui:define name="pageSide">this is the page Side</ui:define>
 

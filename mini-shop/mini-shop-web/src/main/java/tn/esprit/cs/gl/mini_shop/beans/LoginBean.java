@@ -1,43 +1,46 @@
 package tn.esprit.cs.gl.mini_shop.beans;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+
+import tn.esprit.cs.gl.mini_shop.persistence.Admin;
+import tn.esprit.cs.gl.mini_shop.persistence.Customer;
+import tn.esprit.cs.gl.mini_shop.persistence.User;
+import tn.esprit.cs.gl.mini_shop.services.UserServiceLocal;
 
 @ManagedBean
 @SessionScoped
 public class LoginBean {
 	// models
-	private String login;
-	private String password;
+	private User user = new User();
+	// injection of the proxy
+	@EJB
+	private UserServiceLocal userServiceLocal;
 
 	// methods
 
 	public String doLogin() {
-		String navigateTo = null;
-		if (login.equalsIgnoreCase("admin")
-				&& password.equalsIgnoreCase("admin")) {
-			navigateTo = "OK";
+		String navigateTo = "";
+		User userLoggedIn = userServiceLocal.authenticate(user.getLogin(),
+				user.getPassword());
+		if (userLoggedIn instanceof Admin) {
+			navigateTo = "/pages/adminHome/adminHome";
+		} else if (userLoggedIn instanceof Customer) {
+			navigateTo = "/pages/customerHome/customerHome";
 		} else {
-			navigateTo = "KO";
+			navigateTo = "error";
 		}
-		System.out.println(navigateTo);
+
 		return navigateTo;
 	}
 
-	public String getLogin() {
-		return login;
+	public User getUser() {
+		return user;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }
