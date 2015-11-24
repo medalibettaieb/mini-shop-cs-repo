@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title><ui:insert name="pageTitle" /></title>
+	<h:outputStylesheet library="css" name="screen.css" />
+</h:head>
+<h:body>
+	<div id="container">
+		<div id="top">
+			<ui:insert name="pageTop">
+                    [Page Top]
+         </ui:insert>
+		</div>
+
+		<table>
+			<tr>
+				<td>
+					<div id="side">
+						<ui:insert name="pageSide">
+			                    [Page Side]
+			         </ui:insert>
+					</div>
+				</td>
+				<td>
+					<div id="content">
+						<ui:insert name="pageContent">
+                    [Page Content]
+        			 </ui:insert>
+					</div>
+				</td>
+			</tr>
+		</table>
+
+
+
+
+
+
+		<div id="footer">ESPRIT 2015 GL group</div>
+	</div>
+</h:body>
+</html>
