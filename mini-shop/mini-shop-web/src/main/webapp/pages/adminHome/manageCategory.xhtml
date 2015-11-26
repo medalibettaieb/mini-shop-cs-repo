@@ -5,13 +5,17 @@
 	xmlns:jl="http://xmlns.jcp.org/jsf/composite/jsflive"
 	template="/templates/template.xhtml">
 
-	<ui:define name="pageTitle">adminHome</ui:define>
+	<ui:define name="pageTitle">manageCategory</ui:define>
 	<ui:define name="pageTop"></ui:define>
-	<ui:define name="pageContent" />
-	<ui:define name="pageSide">
+	<ui:define name="pageContent">
 		<h:form>
-			<h:commandLink action="manageCategory" value="manage Category" />
+			<h:outputText value="name of the product" />
+			<h:inputText value="#{categoryBean.category.name}" />
+			<h:commandButton action="#{categoryBean.doCreateCategory()}"
+				value="create" />
 		</h:form>
+
 	</ui:define>
+	<ui:define name="pageSide"></ui:define>
 
 </ui:composition>
