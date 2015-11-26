@@ -9,10 +9,38 @@
 	<ui:define name="pageTop"></ui:define>
 	<ui:define name="pageContent">
 		<h:form>
-			<h:outputText value="name of the product" />
+			<h:outputText value="name of the category" />
 			<h:inputText value="#{categoryBean.category.name}" />
 			<h:commandButton action="#{categoryBean.doCreateCategory()}"
 				value="create" />
+
+			<h1>list of categories</h1>
+			<br />
+			<h:dataTable value="#{categoryBean.categories}" var="c" border="2">
+				<h:column id="column1">
+					<f:facet name="header">
+						<h:outputText value="id" />
+					</f:facet>
+					<h:outputText value="#{c.id}" />
+				</h:column>
+				<h:column id="column2">
+					<f:facet name="header">
+						<h:outputText value="name" />
+					</f:facet>
+					<h:outputText value="#{c.name}" />
+				</h:column>
+				<h:column id="column3">
+					<f:facet name="header">
+						<h:outputText value="#" />
+					</f:facet>
+					<h:commandButton action="#{categoryBean.dodeleteCategory()}"
+						value="select">
+						<f:setPropertyActionListener value="#{c}"
+							target="#{categoryBean.categoryChosen}"></f:setPropertyActionListener> 
+					</h:commandButton>
+				</h:column>
+			</h:dataTable>
+
 		</h:form>
 
 	</ui:define>
