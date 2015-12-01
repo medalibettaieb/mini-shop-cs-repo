@@ -16,18 +16,25 @@ public class CategoryBean {
 	private Category category = new Category();
 	private List<Category> categories = new ArrayList<>();
 	private Category categoryChosen = new Category();
+	private Boolean displayForm = false;
 
 	@EJB
 	private CatalogServiceLocal catalogServiceLocal;
 
 	public String doCreateCategory() {
-		catalogServiceLocal.createCategory(category);
+		catalogServiceLocal.saveCategory(categoryChosen);
+		displayForm = false;
 		return "";
 	}
 
 	public String dodeleteCategory() {
 		catalogServiceLocal.removeCategory(categoryChosen);
+		displayForm = false;
 		return "";
+	}
+
+	public void changeDisplayForm() {
+		displayForm = true;
 	}
 
 	public Category getCategory() {
@@ -53,6 +60,14 @@ public class CategoryBean {
 
 	public void setCategoryChosen(Category categoryChosen) {
 		this.categoryChosen = categoryChosen;
+	}
+
+	public Boolean getDisplayForm() {
+		return displayForm;
+	}
+
+	public void setDisplayForm(Boolean displayForm) {
+		this.displayForm = displayForm;
 	}
 
 }
