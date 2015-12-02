@@ -7,6 +7,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import tn.esprit.cs.gl.mini_shop.persistence.Category;
 import tn.esprit.cs.gl.mini_shop.persistence.Product;
 import tn.esprit.cs.gl.mini_shop.services.CatalogServiceLocal;
 
@@ -14,13 +15,34 @@ import tn.esprit.cs.gl.mini_shop.services.CatalogServiceLocal;
 @ViewScoped
 public class ProductBean {
 	private Product product = new Product();
+	private Category categoryInMenu;
 	private List<Product> products = new ArrayList<>();
+	private List<Category> categories = new ArrayList<Category>();
+	private Boolean displayForm = false;
 	@EJB
 	private CatalogServiceLocal catalogServiceLocal;
 
 	public String doCreateProduct() {
-		catalogServiceLocal.createProduct(product);
+		catalogServiceLocal.saveProduct(product);
+		product = new Product();
+		displayForm = false;
 		return "";
+	}
+
+	public String doDeleteProduct() {
+		catalogServiceLocal.removeProduct(product);
+		product = new Product();
+		displayForm = false;
+		return "";
+	}
+
+	public void display() {
+		displayForm = true;
+	}
+
+	public void cancel() {
+		product = new Product();
+		displayForm = false;
 	}
 
 	public Product getProduct() {
@@ -38,5 +60,30 @@ public class ProductBean {
 
 	public void setProducts(List<Product> products) {
 		this.products = products;
+	}
+
+	public Category getCategoryInMenu() {
+		return categoryInMenu;
+	}
+
+	public void setCategoryInMenu(Category categoryInMenu) {
+		this.categoryInMenu = categoryInMenu;
+	}
+
+	public Boolean getDisplayForm() {
+		return displayForm;
+	}
+
+	public void setDisplayForm(Boolean displayForm) {
+		this.displayForm = displayForm;
+	}
+
+	public List<Category> getCategories() {
+		categories = catalogServiceLocal.findAllCategories();
+		return categories;
+	}
+
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
 	}
 }

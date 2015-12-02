@@ -3,51 +3,61 @@
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:jl="http://xmlns.jcp.org/jsf/composite/jsflive"
-	template="/templates/template.xhtml"
-	xmlns:p="http://java.sun.com/jsf/html">
+	template="/templates/template.xhtml">
 
 	<ui:define name="pageTitle">manage product</ui:define>
 	<ui:define name="pageTop"></ui:define>
 	<ui:define name="pageContent">
 		<h:form>
-			<p:dataTable border="1" value="#{productBean.products}" var="p">
-				<p:column id="column1">
-					<p:facet name="header">
-						<p:outputText value="name"></p:outputText>
-					</p:facet>
-				</p:column>
-				<p:column id="column2">
-					<p:facet name="header">
-						<p:outputText value="stock"></p:outputText>
-					</p:facet>
-				</p:column>
-				<p:column id="column3">
-					<p:facet name="header">
-						<p:outputText value="unity"></p:outputText>
-					</p:facet>
-				</p:column>
-				<p:column id="column4">
-					<p:facet name="header">
-						<p:outputText value="#"></p:outputText>
-					</p:facet>
-					<h:commandButton action="" value="select" />
-				</p:column>
-			</p:dataTable>
-			<h:commandButton action="" value="New" />
+			<h:dataTable border="1" value="#{productBean.products}" var="p">
+				<h:column id="column1">
+					<f:facet name="header">
+						<h:outputText value="name"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{p.name}" />
+				</h:column>
+				<h:column id="column2">
+					<f:facet name="header">
+						<h:outputText value="stock"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{p.stock}" />
+				</h:column>
+				<h:column id="column3">
+					<f:facet name="header">
+						<h:outputText value="unity"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{p.unitCost}" />
+				</h:column>
+				<h:column id="column4">
+					<f:facet name="header">
+						<h:outputText value="#"></h:outputText>
+					</f:facet>
+					<h:commandButton action="#{productBean.display()}" value="select">
+						<f:setPropertyActionListener value="#{p}"
+							target="#{productBean.product}"></f:setPropertyActionListener>
+					</h:commandButton>
+				</h:column>
+			</h:dataTable>
+			<h:commandButton action="#{productBean.display()}" value="new" />
 
-			<h:panelGrid columns="2">
-				<p:outputText value="name"></p:outputText>
-				<h:inputText value="" />
-				<p:outputText value="stock"></p:outputText>
-				<h:inputText value="" />
-				<p:outputText value="price"></p:outputText>
-				<h:inputText value="" />
-				<p:outputText value="category"></p:outputText>
-				<h:inputText value="" />
+			<h:panelGrid columns="2" rendered="#{productBean.displayForm}">
+				<h:outputText value="name" />
+				<h:inputText value="#{productBean.product.name}" />
+				<h:outputText value="stock" />
+				<h:inputText value="#{productBean.product.stock}" />
+				<h:outputText value="price" />
+				<h:inputText value="#{productBean.product.unitCost}" />
+				<h:outputText value="category" />
+				<h:selectOneMenu value="#{productBean.categoryInMenu}">
+					<f:selectItem itemLabel="please select one" />
+				</h:selectOneMenu>
+			
+			<h:commandButton action="#{productBean.doCreateProduct()}"
+				value="save or update" />
+			<h:commandButton action="#{productBean.doDeleteProduct()}"
+				value="delete" />
+			<h:commandButton action="#{productBean.cancel()}" value="cancel" />
 			</h:panelGrid>
-			<h:commandButton action="" value="save or update" />
-			<h:commandButton action="" value="delete" />
-			<h:commandButton action="" value="cancel" />
 		</h:form>
 
 	</ui:define>
