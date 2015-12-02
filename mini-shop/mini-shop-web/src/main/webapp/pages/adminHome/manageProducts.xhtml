@@ -30,6 +30,12 @@
 				</h:column>
 				<h:column id="column4">
 					<f:facet name="header">
+						<h:outputText value="category"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{p.category.name}" />
+				</h:column>
+				<h:column id="column5">
+					<f:facet name="header">
 						<h:outputText value="#"></h:outputText>
 					</f:facet>
 					<h:commandButton action="#{productBean.display()}" value="select">
@@ -48,15 +54,18 @@
 				<h:outputText value="price" />
 				<h:inputText value="#{productBean.product.unitCost}" />
 				<h:outputText value="category" />
-				<h:selectOneMenu value="#{productBean.categoryInMenu}">
+				<h:selectOneMenu value="#{productBean.categoryInMenu}"
+					converter="cc">
 					<f:selectItem itemLabel="please select one" />
+					<f:selectItems value="#{productBean.categories}" var="c"
+						itemLabel="#{c.name}" itemValue="#{c}"></f:selectItems>
 				</h:selectOneMenu>
-			
-			<h:commandButton action="#{productBean.doCreateProduct()}"
-				value="save or update" />
-			<h:commandButton action="#{productBean.doDeleteProduct()}"
-				value="delete" />
-			<h:commandButton action="#{productBean.cancel()}" value="cancel" />
+
+				<h:commandButton action="#{productBean.doCreateProduct()}"
+					value="save or update" />
+				<h:commandButton action="#{productBean.doDeleteProduct()}"
+					value="delete" />
+				<h:commandButton action="#{productBean.cancel()}" value="cancel" />
 			</h:panelGrid>
 		</h:form>
 

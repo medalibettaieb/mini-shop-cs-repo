@@ -33,7 +33,9 @@ public class CategoryBean {
 		displayForm = false;
 		return "";
 	}
-
+	public Category doFindCategoryByNameBis(String name) {
+		return catalogServiceLocal.findCategoryByName(name);
+	}
 	public void changeDisplayForm() {
 		displayForm = true;
 	}
@@ -75,5 +77,7 @@ public class CategoryBean {
 	public void setDisplayForm(Boolean displayForm) {
 		this.displayForm = displayForm;
 	}
+
+	
 
 }

@@ -15,7 +15,7 @@ import tn.esprit.cs.gl.mini_shop.services.CatalogServiceLocal;
 @ViewScoped
 public class ProductBean {
 	private Product product = new Product();
-	private Category categoryInMenu;
+	private Category categoryInMenu = new Category();
 	private List<Product> products = new ArrayList<>();
 	private List<Category> categories = new ArrayList<Category>();
 	private Boolean displayForm = false;
@@ -23,6 +23,7 @@ public class ProductBean {
 	private CatalogServiceLocal catalogServiceLocal;
 
 	public String doCreateProduct() {
+		product.setCategory(categoryInMenu);
 		catalogServiceLocal.saveProduct(product);
 		product = new Product();
 		displayForm = false;
