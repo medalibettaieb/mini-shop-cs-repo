@@ -24,6 +24,7 @@ public class CategoryBean {
 	public String doCreateCategory() {
 		catalogServiceLocal.saveCategory(categoryChosen);
 		displayForm = false;
+		categoryChosen = new Category();
 		return "";
 	}
 
@@ -35,6 +36,11 @@ public class CategoryBean {
 
 	public void changeDisplayForm() {
 		displayForm = true;
+	}
+
+	public void cancel() {
+		displayForm = false;
+		categoryChosen = new Category();
 	}
 
 	public Category getCategory() {
