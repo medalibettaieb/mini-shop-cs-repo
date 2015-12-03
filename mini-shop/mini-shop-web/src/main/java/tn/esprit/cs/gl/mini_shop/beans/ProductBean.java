@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import tn.esprit.cs.gl.mini_shop.persistence.Category;
@@ -21,8 +22,11 @@ public class ProductBean {
 	private Boolean displayForm = false;
 	@EJB
 	private CatalogServiceLocal catalogServiceLocal;
+	@ManagedProperty(value = "#{loginBean}")
+	private LoginBean loginBean;
 
 	public String doCreateProduct() {
+		System.out.println("the admin is : " + loginBean.getUser().getLogin());
 		product.setCategory(categoryInMenu);
 		catalogServiceLocal.saveProduct(product);
 		product = new Product();
@@ -86,5 +90,13 @@ public class ProductBean {
 
 	public void setCategories(List<Category> categories) {
 		this.categories = categories;
+	}
+
+	public LoginBean getLoginBean() {
+		return loginBean;
+	}
+
+	public void setLoginBean(LoginBean loginBean) {
+		this.loginBean = loginBean;
 	}
 }
