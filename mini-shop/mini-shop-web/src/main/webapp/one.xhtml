@@ -3,9 +3,11 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	template="/templates/template.xhtml">
-	
+
 	<ui:define name="pageTitle">onePage</ui:define>
-	<ui:define name="pageTop">this is the page Top</ui:define>
+	<ui:define name="pageTop">
+		<ui:include src="/templates/topPage.xhtml" />
+	</ui:define>
 	<ui:define name="pageContent">this is the page Content</ui:define>
 	<ui:define name="pageSide">this is the page Side</ui:define>
 

@@ -3,6 +3,7 @@ package tn.esprit.cs.gl.mini_shop.beans;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import tn.esprit.cs.gl.mini_shop.persistence.Admin;
 import tn.esprit.cs.gl.mini_shop.persistence.Customer;
@@ -24,6 +25,7 @@ public class LoginBean {
 		String navigateTo = "";
 		User userLoggedIn = userServiceLocal.authenticate(user.getLogin(),
 				user.getPassword());
+		user = userLoggedIn;
 		if (userLoggedIn instanceof Admin) {
 			navigateTo = "/pages/adminHome/adminHome";
 		} else if (userLoggedIn instanceof Customer) {
@@ -33,6 +35,13 @@ public class LoginBean {
 		}
 
 		return navigateTo;
+	}
+
+	public String logOut() {
+		FacesContext.getCurrentInstance().getExternalContext()
+				.invalidateSession();
+		user = new User();
+		return "/loginPage?faces-redirect=true";
 	}
 
 	public User getUser() {
