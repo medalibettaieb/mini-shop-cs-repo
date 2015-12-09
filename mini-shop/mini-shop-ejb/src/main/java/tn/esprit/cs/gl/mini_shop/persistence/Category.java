@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.PreRemove;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "t_category")
 public class Category implements Serializable {
@@ -49,6 +51,7 @@ public class Category implements Serializable {
 	}
 
 	@OneToMany(mappedBy = "category")
+	@JsonIgnore
 	public List<Product> getProducts() {
 		return products;
 	}
